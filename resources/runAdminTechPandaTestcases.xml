@@ -5,6 +5,9 @@
 		<classes>
 			<class name="com.techpanda.account.Level_01_Dont_Repeat_Yourself" />
 		</classes>
+		<classes>
+			<class name="com.techpanda.account.Level_02_Apply_Base_Page_Part_I" />
+		</classes>
 	</test>
 
 </suite>

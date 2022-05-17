@@ -17,8 +17,7 @@ public class Level_02_Apply_Base_Page extends BasePage {
 	WebDriver driver;
 
 	String projectPath = System.getProperty("user.dir");
-	String firstName, middleName, lastName, email, password;
-	String fullName = firstName + " " + lastName;
+	String firstName, middleName, lastName, email, password, fullName;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -32,6 +31,7 @@ public class Level_02_Apply_Base_Page extends BasePage {
 		firstName = "Test";
 		middleName = "auto";
 		email = "Laitest" + randomNumber() + "@gmail.com";
+		fullName = firstName + " " + lastName;
 		password = "12345678";
 	}
 

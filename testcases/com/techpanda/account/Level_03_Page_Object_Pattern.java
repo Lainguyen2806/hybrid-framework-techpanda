@@ -24,8 +24,7 @@ public class Level_03_Page_Object_Pattern {
 	MyDashboardPageObject myDashboardPage;
 	RegisterPageObject registerPage;
 	
-	String firstName, middleName, lastName, email, password;
-	String fullName = firstName + "" + middleName + "" + lastName;
+	String firstName, middleName, lastName, email, password, fullName;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -43,6 +42,7 @@ public class Level_03_Page_Object_Pattern {
 		firstName = "Test";
 		middleName = "auto";
 		email = "Laitest" + randomNumber() + "@gmail.com";
+		fullName = firstName + "" + middleName + "" + lastName;
 		password = "12345678";
 
 	}
@@ -151,7 +151,7 @@ public class Level_03_Page_Object_Pattern {
 		myDashboardPage = new MyDashboardPageObject(driver);
 		
 		myDashboardPage.sleepInSecond(5);
-		//Assert.assertTrue(myDashboardPage.isContactInfoDisplayed(fullName));
+		Assert.assertTrue(myDashboardPage.isContactInfoDisplayed(fullName));
 		Assert.assertTrue(myDashboardPage.isContactInfoDisplayed(email));
 
 	}

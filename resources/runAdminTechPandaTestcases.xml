@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite parallel="false" name="Tech Panda">
 
-	<test name="Run on Chrome browser">
+	<test name="Run on CHROME browser">
+	<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="com.techpanda.account.Level_01_Dont_Repeat_Yourself" />
+			<class name="com.techpanda.account.Level_04_Multiple_Browsers" />
 		</classes>
+	</test>
+	
+	<test name="Run on FIREFOX browser">
+	<parameter name="browser" value="firefox" />
 		<classes>
-			<class name="com.techpanda.account.Level_02_Apply_Base_Page" />
+			<class name="com.techpanda.account.Level_04_Multiple_Browsers" />
 		</classes>
+	</test>
+	
+	
+	<test name="Run on EDGE browser">
+	<parameter name="browser" value="edge" />
 		<classes>
-			<class name="com.techpanda.account.Level_03_Page_Object_Pattern" />
+			<class name="com.techpanda.account.Level_04_Multiple_Browsers" />
 		</classes>
 	</test>
 

@@ -3,7 +3,6 @@ package pageObjects.user;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUIs.LoginPageUI;
 import pageUIs.MyDashboardPageUI;
 
 public class MyDashboardPageObject extends BasePage {
@@ -25,9 +24,10 @@ public class MyDashboardPageObject extends BasePage {
 		clickToElement(driver, MyDashboardPageUI.HEADER_ACCOUNT_BUTTON);
 	}
 
-	public void clickToLogoutButton() {
+	public HomePageObject clickToLogoutButton() {
 		waitForElementClickable(driver, MyDashboardPageUI.LOGOUT_BUTTON);
 		clickToElement(driver, MyDashboardPageUI.LOGOUT_BUTTON);
+		return PageGeneratorManager.getHomePage(driver);
 		
 	}
 
@@ -35,6 +35,19 @@ public class MyDashboardPageObject extends BasePage {
 		waitForElementVisible(driver, MyDashboardPageUI.CONTACT_INFO_TEXT);
 		String actualContactInfoText = getElementText(driver, MyDashboardPageUI.CONTACT_INFO_TEXT);
 		return actualContactInfoText.contains(contactInfo);
+	}
+
+	public AccountInfoPageObject clickToAccountInformationLink() {
+		waitForElementClickable(driver, MyDashboardPageUI.ACCOUNT_INFO_LINK);
+		clickToElement(driver, MyDashboardPageUI.ACCOUNT_INFO_LINK);
+		return PageGeneratorManager.getAccountInfoPage(driver);
+	
+		
+	}
+
+	public boolean isAccountInfoSuccessfulUpdateMessageDisplayed() {
+		waitForElementVisible(driver, MyDashboardPageUI.UPDATE_ACCOUNT_SUCCESSFULLY_MESSAGE);
+		return isElementDisplayed(driver, MyDashboardPageUI.UPDATE_ACCOUNT_SUCCESSFULLY_MESSAGE);
 	}
 
 }

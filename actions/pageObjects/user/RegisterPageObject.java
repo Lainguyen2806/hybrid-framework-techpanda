@@ -56,9 +56,10 @@ public class RegisterPageObject extends BasePage {
 
 	}
 
-	public void clickToRegisterButton() {
+	public MyDashboardPageObject clickToRegisterButton() {
 		waitForElementClickable(driver, RegisterPageUI.REGISTER_BUTTON);
 		clickToElement(driver, RegisterPageUI.REGISTER_BUTTON);
+		return PageGeneratorManager.getMyDashboardPage(driver);
 		
 
 	}

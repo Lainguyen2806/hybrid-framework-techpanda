@@ -24,9 +24,10 @@ public class LoginPageObject extends BasePage {
 
 	}
 
-	public void clickToLoginButton() {
+	public MyDashboardPageObject clickToLoginButton() {
 		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
 		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
+		return PageGeneratorManager.getMyDashboardPage(driver);
 
 	}
 
@@ -55,9 +56,10 @@ public class LoginPageObject extends BasePage {
 		return getElementText(driver, LoginPageUI.PASSWORD_INVALID_ERROR_MESSAGE);
 	}
 
-	public void clickToCreateAnAccountButton() {
+	public RegisterPageObject clickToCreateAnAccountButton() {
 		waitForElementClickable(driver, LoginPageUI.CREATE_ACCOUNT_BUTTON);
 		clickToElement(driver, LoginPageUI.CREATE_ACCOUNT_BUTTON);
+		return PageGeneratorManager.getRegisterPage(driver);
 		
 	}
 

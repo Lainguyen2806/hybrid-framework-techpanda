@@ -2,25 +2,32 @@
 <suite parallel="false" name="Tech Panda">
 
 	<test name="Run on CHROME browser">
-	<parameter name="browser" value="chrome" />
+		<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="com.techpanda.account.Level_04_Multiple_Browsers" />
+			<class name="com.techpanda.account.Level_06_Page_Generator_PIII" />
 		</classes>
 	</test>
-	
-	<test name="Run on FIREFOX browser">
-	<parameter name="browser" value="firefox" />
-		<classes>
-			<class name="com.techpanda.account.Level_04_Multiple_Browsers" />
-		</classes>
-	</test>
-	
-	
-	<test name="Run on EDGE browser">
-	<parameter name="browser" value="edge" />
-		<classes>
-			<class name="com.techpanda.account.Level_04_Multiple_Browsers" />
-		</classes>
-	</test>
+
+<!-- 	<test name="Run on FIREFOX browser"> -->
+<!-- 		<parameter name="browser" value="firefox" /> -->
+<!-- 		<classes> -->
+<!-- 			<class name="com.techpanda.account.Level_04_Multiple_Browsers" /> -->
+<!-- 		</classes> -->
+<!-- 	</test> -->
+
+
+<!-- 	<test name="Run on EDGE browser"> -->
+<!-- 		<parameter name="browser" value="edge" /> -->
+<!-- 		<classes> -->
+<!-- 			<class name="com.techpanda.account.Level_04_Multiple_Browsers" /> -->
+<!-- 		</classes> -->
+<!-- 	</test> -->
+
+<!-- 	<test name="Run on SAFARI browser"> -->
+<!-- 		<parameter name="browser" value="safari" /> -->
+<!-- 		<classes> -->
+<!-- 			<class name="com.techpanda.account.Level_04_Multiple_Browsers" /> -->
+<!-- 		</classes> -->
+<!-- 	</test> -->
 
 </suite>

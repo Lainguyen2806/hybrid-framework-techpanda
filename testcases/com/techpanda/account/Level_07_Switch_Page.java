@@ -11,11 +11,14 @@ import commons.BaseTest;
 import pageObjects.user.AccountInfoPageObject;
 import pageObjects.user.HomePageObject;
 import pageObjects.user.LoginPageObject;
+import pageObjects.user.MyApplicationPageObject;
 import pageObjects.user.MyDashboardPageObject;
+import pageObjects.user.MyOrderPageObject;
+import pageObjects.user.MyProductReviewPageObject;
 import pageObjects.user.PageGeneratorManager;
 import pageObjects.user.RegisterPageObject;
 
-public class Level_06_Page_Generator_PIII extends BaseTest {
+public class Level_07_Switch_Page extends BaseTest {
 	WebDriver driver;
 
 	HomePageObject homePage;
@@ -23,6 +26,9 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 	MyDashboardPageObject myDashboardPage;
 	RegisterPageObject registerPage;
 	AccountInfoPageObject accountInfoPage;
+	MyOrderPageObject myOrderPage;
+	MyApplicationPageObject myApplicationPage;
+	MyProductReviewPageObject myProductReviewPage;
 
 	String firstName, middleName, lastName, email, password, fullName, newPassword;
 
@@ -160,6 +166,16 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 
 	}
 	
+	@Test
+	public void TC_09_SwitchPage() {
+		myOrderPage = myDashboardPage.openMyOrderPage(driver);
+		
+		myApplicationPage = myOrderPage.openMyApplicationPage(driver);
+		
+		myProductReviewPage = myApplicationPage.openMyProductReviewPage(driver);			
+
+	}
+
 
 	@AfterClass
 	public void afterClass() {

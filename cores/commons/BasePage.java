@@ -14,6 +14,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.user.AccountInfoPageObject;
+import pageObjects.user.LoginPageObject;
+import pageObjects.user.MyApplicationPageObject;
+import pageObjects.user.MyOrderPageObject;
+import pageObjects.user.MyProductReviewPageObject;
+import pageObjects.user.PageGeneratorManager;
+import pageUIs.CommonPageUI;
+import pageUIs.HomePageUI;
+
 public class BasePage {
 	
 public static BasePage getBasePageInstance() {
@@ -304,6 +313,34 @@ public void openPageUrl(WebDriver driver, String pageUrl) {
 	public void waitForElementClickable(WebDriver driver, String locator) {
 		new WebDriverWait (driver, longTimeout).until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));	
 	}
+	
+	public AccountInfoPageObject openAccountInfoPage(WebDriver driver) {
+		waitForElementClickable(driver, CommonPageUI.ACCOUNT_INFO_LINK);
+		clickToElement(driver, CommonPageUI.ACCOUNT_INFO_LINK);
+		return PageGeneratorManager.getAccountInfoPage(driver);
+		
+	}
+	
+	public MyOrderPageObject openMyOrderPage(WebDriver driver) {
+		waitForElementClickable(driver, CommonPageUI.MY_ORDER_LINK);
+		clickToElement(driver, CommonPageUI.MY_ORDER_LINK);
+		return PageGeneratorManager.getMyOrderPage(driver);
+		
+	}
+	
+	public MyProductReviewPageObject openMyProductReviewPage(WebDriver driver) {
+		waitForElementClickable(driver, CommonPageUI.MY_PRODUCT_REVIEW_LINK);
+		clickToElement(driver, CommonPageUI.MY_PRODUCT_REVIEW_LINK);
+		return PageGeneratorManager.getMyProductReviewPage(driver);
+	}
+		
+	public MyApplicationPageObject openMyApplicationPage(WebDriver driver) {
+		waitForElementClickable(driver, CommonPageUI.MY_APPLICATION_LINK);
+		clickToElement(driver, CommonPageUI.MY_APPLICATION_LINK);
+		return PageGeneratorManager.getMyApplicationPage(driver);
+	
+	}
+	
 	
 	
 	public void sleepInSecond(long second) {

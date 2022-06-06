@@ -43,7 +43,7 @@ public class Level_06_Page_Generator_PII extends BaseTest {
 
 	@Test
 	public void TC_01_Login_With_Empty_Email_And_Password() {
-		loginPage =	homePage.clickToMyAccountLink();
+		loginPage =	homePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("");
 		loginPage.inputToPasswordTextbox("");
@@ -55,7 +55,7 @@ public class Level_06_Page_Generator_PII extends BaseTest {
 
 	@Test
 	public void TC_02_Login_With_Invalid_Email() {
-		loginPage = homePage.clickToMyAccountLink();
+		loginPage = homePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("123@456.789");
 		loginPage.inputToPasswordTextbox("123456");
@@ -68,7 +68,7 @@ public class Level_06_Page_Generator_PII extends BaseTest {
 
 	@Test
 	public void TC_03_Login_With_Incorrect_Email() {
-		loginPage = homePage.clickToMyAccountLink();
+		loginPage = homePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123456");
@@ -80,7 +80,7 @@ public class Level_06_Page_Generator_PII extends BaseTest {
 
 	@Test(description = "Password less than 6 characters")
 	public void TC_04_Login_With_Invalid_Password() {
-		loginPage = homePage.clickToMyAccountLink();
+		loginPage = homePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123");
@@ -93,7 +93,7 @@ public class Level_06_Page_Generator_PII extends BaseTest {
 
 	@Test
 	public void TC_05_Login_With_Incorrect_Password() {
-		loginPage = homePage.clickToMyAccountLink();
+		loginPage = homePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox(randomNumber() + "");
@@ -104,7 +104,7 @@ public class Level_06_Page_Generator_PII extends BaseTest {
 
 	@Test
 	public void TC_06_CreateAnAccount() {
-		loginPage = homePage.clickToMyAccountLink();
+		loginPage = homePage.openLoginPage();
 		
 		registerPage = loginPage.clickToCreateAnAccountButton();
 
@@ -127,7 +127,7 @@ public class Level_06_Page_Generator_PII extends BaseTest {
 
 	@Test
 	public void TC_07_LoginWithValidEmailAndPassword() {
-		loginPage = homePage.clickToMyAccountLink();
+		loginPage = homePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox(email);
 		loginPage.inputToPasswordTextbox(password);

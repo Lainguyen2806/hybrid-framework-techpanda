@@ -43,7 +43,7 @@ public class Level_06_Page_Generator_PI extends BaseTest {
 
 	@Test
 	public void TC_01_Login_With_Empty_Email_And_Password() {
-		homePage.clickToMyAccountLink();
+		homePage.openLoginPage();
 		loginPage = new LoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("");
@@ -56,7 +56,7 @@ public class Level_06_Page_Generator_PI extends BaseTest {
 
 	@Test
 	public void TC_02_Login_With_Invalid_Email() {
-		homePage.clickToMyAccountLink();
+		homePage.openLoginPage();
 		loginPage = new LoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("123@456.789");
@@ -70,7 +70,7 @@ public class Level_06_Page_Generator_PI extends BaseTest {
 
 	@Test
 	public void TC_03_Login_With_Incorrect_Email() {
-		homePage.clickToMyAccountLink();
+		homePage.openLoginPage();
 		loginPage = new LoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
@@ -83,7 +83,7 @@ public class Level_06_Page_Generator_PI extends BaseTest {
 
 	@Test(description = "Password less than 6 characters")
 	public void TC_04_Login_With_Invalid_Password() {
-		homePage.clickToMyAccountLink();
+		homePage.openLoginPage();
 		loginPage = new LoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
@@ -97,7 +97,7 @@ public class Level_06_Page_Generator_PI extends BaseTest {
 
 	@Test
 	public void TC_05_Login_With_Incorrect_Password() {
-		homePage.clickToMyAccountLink();
+		homePage.openLoginPage();
 		loginPage = new LoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
@@ -109,7 +109,7 @@ public class Level_06_Page_Generator_PI extends BaseTest {
 
 	@Test
 	public void TC_06_CreateAnAccount() {
-		homePage.clickToMyAccountLink();
+		homePage.openLoginPage();
 		loginPage = new LoginPageObject(driver);
 		loginPage.clickToCreateAnAccountButton();
 
@@ -136,7 +136,7 @@ public class Level_06_Page_Generator_PI extends BaseTest {
 
 	@Test
 	public void TC_07_LoginWithValidEmailAndPassword() {
-		homePage.clickToMyAccountLink();
+		homePage.openLoginPage();
 		loginPage = new LoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox(email);

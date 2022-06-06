@@ -37,13 +37,6 @@ public class MyDashboardPageObject extends BasePage {
 		return actualContactInfoText.contains(contactInfo);
 	}
 
-	public AccountInfoPageObject clickToAccountInformationLink() {
-		waitForElementClickable(driver, MyDashboardPageUI.ACCOUNT_INFO_LINK);
-		clickToElement(driver, MyDashboardPageUI.ACCOUNT_INFO_LINK);
-		return PageGeneratorManager.getAccountInfoPage(driver);
-	
-		
-	}
 
 	public boolean isAccountInfoSuccessfulUpdateMessageDisplayed() {
 		waitForElementVisible(driver, MyDashboardPageUI.UPDATE_ACCOUNT_SUCCESSFULLY_MESSAGE);

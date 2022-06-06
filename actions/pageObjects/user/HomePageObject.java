@@ -13,7 +13,7 @@ public class HomePageObject extends BasePage{
 		this.driver = driver;
 	}
 
-	public LoginPageObject clickToMyAccountLink() {
+	public LoginPageObject openLoginPage() {
 		waitForElementClickable(driver,HomePageUI.MY_ACCOUNT_LINK);
 		clickToElement(driver, HomePageUI.MY_ACCOUNT_LINK);
 		return PageGeneratorManager.getLoginPage(driver);

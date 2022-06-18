@@ -10,8 +10,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import pageObjects.user.HomePageObject;
-import pageObjects.user.LoginPageObject;
+import pageObjects.user.UserHomePageObject;
+import pageObjects.user.UserLoginPageObject;
 import pageObjects.user.MyDashboardPageObject;
 import pageObjects.user.RegisterPageObject;
 
@@ -19,10 +19,11 @@ public class Level_03_Page_Object_Pattern {
 	WebDriver driver;
 	String projectPath = System.getProperty("user.dir");
 	
-	HomePageObject homePage;
-	LoginPageObject loginPage;
+	UserHomePageObject homePage;
+	UserLoginPageObject loginPage;
 	MyDashboardPageObject myDashboardPage;
 	RegisterPageObject registerPage;
+	UserHomePageObject userHomePage;
 	
 	String firstName, middleName, lastName, email, password, fullName;
 
@@ -36,7 +37,7 @@ public class Level_03_Page_Object_Pattern {
 
 		driver.get("http://live.techpanda.org/");
 
-		homePage = new HomePageObject(driver);
+		homePage = new UserHomePageObject(driver);
 		
 		lastName = "Lai";
 		firstName = "Test";
@@ -50,7 +51,7 @@ public class Level_03_Page_Object_Pattern {
 	@Test
 	public void TC_01_Login_With_Empty_Email_And_Password() {
 		homePage.openLoginPage();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("");
 		loginPage.inputToPasswordTextbox("");
@@ -63,7 +64,7 @@ public class Level_03_Page_Object_Pattern {
 	@Test
 	public void TC_02_Login_With_Invalid_Email() {
 		homePage.openLoginPage();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("123@456.789");
 		loginPage.inputToPasswordTextbox("123456");
@@ -77,7 +78,7 @@ public class Level_03_Page_Object_Pattern {
 	@Test
 	public void TC_03_Login_With_Incorrect_Email() {
 		homePage.openLoginPage();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123456");
@@ -90,7 +91,7 @@ public class Level_03_Page_Object_Pattern {
 	@Test(description = "Password less than 6 characters")
 	public void TC_04_Login_With_Invalid_Password() {
 		homePage.openLoginPage();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123");
@@ -104,7 +105,7 @@ public class Level_03_Page_Object_Pattern {
 	@Test
 	public void TC_05_Login_With_Incorrect_Password() {
 		homePage.openLoginPage();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox(randomNumber() + "");
@@ -116,7 +117,7 @@ public class Level_03_Page_Object_Pattern {
 	@Test
 	public void TC_06_CreateAnAccount() {
 		homePage.openLoginPage();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 		loginPage.clickToCreateAnAccountButton();
 			
 		registerPage = new RegisterPageObject(driver);
@@ -134,15 +135,14 @@ public class Level_03_Page_Object_Pattern {
 		
 		Assert.assertTrue(myDashboardPage.isRegisterAccountSuccessfullyMessageDisplayed("Thank you for registering with Main Website Store."));
 
-		myDashboardPage.clickToAccountInHeaderButton();
-		myDashboardPage.clickToLogoutButton();
+		userHomePage = myDashboardPage.clickToLogoutLinkWithUser(driver);
 
 	}
 
 	@Test
 	public void TC_07_LoginWithValidEmailAndPassword() {
 		homePage.openLoginPage();
-		loginPage = new LoginPageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
 		
 		loginPage.inputToEmailAddressTextbox(email);
 		loginPage.inputToPasswordTextbox(password);

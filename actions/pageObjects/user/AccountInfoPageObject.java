@@ -3,7 +3,8 @@ package pageObjects.user;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUIs.AccountInfoPageUI;
+import commons.PageGeneratorManager;
+import pageUIs.user.AccountInfoPageUI;
 
 public class AccountInfoPageObject extends BasePage {
 		

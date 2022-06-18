@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite parallel="false" name="Tech Panda">
+	<parameter name="userURL" value="http://live.techpanda.org/index.php/" />
+	<parameter name="adminURL" value="http://live.techpanda.org/index.php/backendlogin" />
 
 	<test name="Run on CHROME browser">
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="com.techpanda.account.Level_07_Switch_Page" />
+			<class name="com.techpanda.account.Level_09_Switch_Role" />
 		</classes>
 	</test>
 

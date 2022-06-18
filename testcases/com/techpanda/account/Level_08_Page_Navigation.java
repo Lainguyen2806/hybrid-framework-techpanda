@@ -1,7 +1,5 @@
 package com.techpanda.account;
 
-import java.util.Random;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -10,41 +8,56 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import commons.PageGeneratorManager;
+import pageObjects.user.AboutUsPageObject;
+import pageObjects.user.AccountInfoPageObject;
 import pageObjects.user.UserHomePageObject;
 import pageObjects.user.UserLoginPageObject;
+import pageObjects.user.MyAccountPageObject;
+import pageObjects.user.MyApplicationPageObject;
 import pageObjects.user.MyDashboardPageObject;
+import pageObjects.user.MyOrderPageObject;
+import pageObjects.user.MyProductReviewPageObject;
 import pageObjects.user.RegisterPageObject;
+import pageObjects.user.SearchTermPageObject;
 
-public class Level_04_Multiple_Browsers extends BaseTest {
+public class Level_08_Page_Navigation extends BaseTest {
 	WebDriver driver;
 
+	UserHomePageObject userHomePage;
 	UserLoginPageObject loginPage;
 	MyDashboardPageObject myDashboardPage;
 	RegisterPageObject registerPage;
-	UserHomePageObject userHomePage;
+	AccountInfoPageObject accountInfoPage;
+	MyOrderPageObject myOrderPage;
+	MyApplicationPageObject myApplicationPage;
+	MyProductReviewPageObject myProductReviewPage;
+	AboutUsPageObject aboutUsPage;
+	SearchTermPageObject searchTermPage;
+	MyAccountPageObject myAccountPage;
 
-	String firstName, middleName, lastName, email, password, fullName;
+	String firstName, middleName, lastName, email, password, fullName, newPassword;
 
 	@Parameters({ "browser" })
 	@BeforeClass
 	public void beforeClass(String browserName) {
 		driver = getBrowserDriver(browserName);
 
-		userHomePage = new UserHomePageObject(driver);
+		userHomePage = PageGeneratorManager.getUserHomePage(driver);
 
 		lastName = "Lai";
 		firstName = "Test";
 		middleName = "auto";
-		email = "Laitest" + randomNumber() + "@gmail.com";
+		email = "Laitest" + getRandomNumber() + "@gmail.com";
 		fullName = firstName + " " + middleName + " " + lastName;
 		password = "12345678";
+		newPassword = "123456a@";
 
 	}
 
 	@Test
 	public void TC_01_Login_With_Empty_Email_And_Password() {
-		userHomePage.openLoginPage();
-		loginPage = new UserLoginPageObject(driver);
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("");
 		loginPage.inputToPasswordTextbox("");
@@ -56,8 +69,7 @@ public class Level_04_Multiple_Browsers extends BaseTest {
 
 	@Test
 	public void TC_02_Login_With_Invalid_Email() {
-		userHomePage.openLoginPage();
-		loginPage = new UserLoginPageObject(driver);
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("123@456.789");
 		loginPage.inputToPasswordTextbox("123456");
@@ -70,10 +82,9 @@ public class Level_04_Multiple_Browsers extends BaseTest {
 
 	@Test
 	public void TC_03_Login_With_Incorrect_Email() {
-		userHomePage.openLoginPage();
-		loginPage = new UserLoginPageObject(driver);
+		loginPage = userHomePage.openLoginPage();
 
-		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
+		loginPage.inputToEmailAddressTextbox("auto_test" + getRandomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123456");
 		loginPage.clickToLoginButton();
 
@@ -83,10 +94,9 @@ public class Level_04_Multiple_Browsers extends BaseTest {
 
 	@Test(description = "Password less than 6 characters")
 	public void TC_04_Login_With_Invalid_Password() {
-		userHomePage.openLoginPage();
-		loginPage = new UserLoginPageObject(driver);
+		loginPage = userHomePage.openLoginPage();
 
-		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
+		loginPage.inputToEmailAddressTextbox("auto_test" + getRandomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123");
 		loginPage.clickToLoginButton();
 
@@ -97,11 +107,10 @@ public class Level_04_Multiple_Browsers extends BaseTest {
 
 	@Test
 	public void TC_05_Login_With_Incorrect_Password() {
-		userHomePage.openLoginPage();
-		loginPage = new UserLoginPageObject(driver);
+		loginPage = userHomePage.openLoginPage();
 
-		loginPage.inputToEmailAddressTextbox("auto_test" + randomNumber() + "@live.com");
-		loginPage.inputToPasswordTextbox(randomNumber() + "");
+		loginPage.inputToEmailAddressTextbox("auto_test" + getRandomNumber() + "@live.com");
+		loginPage.inputToPasswordTextbox(String.valueOf(getRandomNumber()));
 		loginPage.clickToLoginButton();
 
 		Assert.assertEquals(loginPage.getEmailPasswordIncorrectErrorMessage(), "Invalid login or password.");
@@ -109,11 +118,9 @@ public class Level_04_Multiple_Browsers extends BaseTest {
 
 	@Test
 	public void TC_06_CreateAnAccount() {
-		userHomePage.openLoginPage();
-		loginPage = new UserLoginPageObject(driver);
-		loginPage.clickToCreateAnAccountButton();
+		loginPage = userHomePage.openLoginPage();
 
-		registerPage = new RegisterPageObject(driver);
+		registerPage = loginPage.clickToCreateAnAccountButton();
 
 		registerPage.inputToFirstNameTextbox(firstName);
 		registerPage.inputToMiddleNameTextbox(middleName);
@@ -122,42 +129,67 @@ public class Level_04_Multiple_Browsers extends BaseTest {
 		registerPage.inputToPasswordTextbox(password);
 		registerPage.inputToConfirmPasswordTextbox(password);
 		registerPage.checkOnSignUpCheckbox();
-		registerPage.clickToRegisterButton();
-
-		myDashboardPage = new MyDashboardPageObject(driver);
+		myDashboardPage = registerPage.clickToRegisterButton();
 
 		Assert.assertTrue(myDashboardPage
 				.isRegisterAccountSuccessfullyMessageDisplayed("Thank you for registering with Main Website Store."));
 
+		userHomePage = myDashboardPage.clickToLogoutLinkWithUser(driver);
 
 	}
 
 	@Test
 	public void TC_07_LoginWithValidEmailAndPassword() {
-		userHomePage.openLoginPage();
-		loginPage = new UserLoginPageObject(driver);
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox(email);
 		loginPage.inputToPasswordTextbox(password);
-		loginPage.clickToLoginButton();
-
-		myDashboardPage = new MyDashboardPageObject(driver);
+		myDashboardPage = loginPage.clickToLoginButton();
 
 		myDashboardPage.sleepInSecond(5);
-		Assert.assertTrue(myDashboardPage.isContactInfoDisplayed(email));
 		Assert.assertTrue(myDashboardPage.isContactInfoDisplayed(fullName));
-	
+		Assert.assertTrue(myDashboardPage.isContactInfoDisplayed(email));
 
+	}
+
+	@Test
+	public void TC_08_UpdateAccountInfo() {
+		accountInfoPage = myDashboardPage.openAccountInfoPage();
+
+		accountInfoPage.inputToFirstNameTextbox("Test");
+		accountInfoPage.inputToLastNameTextbox("Automation");
+		accountInfoPage.inputToEmailTextbox("auto_test" + getRandomNumber() + "@live.com");
+		accountInfoPage.inputToCurrentPasswordTextbox(password);
+		accountInfoPage.checkOnChangePasswordCheckbox();
+		accountInfoPage.inputToNewPasswordTextbox(newPassword);
+		accountInfoPage.inputToNewConfirmPasswordTextbox(newPassword);
+		myDashboardPage = accountInfoPage.clickToSaveButton();
+
+		myDashboardPage.sleepInSecond(5);
+		Assert.assertTrue(myDashboardPage.isAccountInfoSuccessfulUpdateMessageDisplayed());
+
+	}
+
+	@Test
+	public void TC_09_SwitchPage() {
+		myOrderPage = myDashboardPage.openMyOrderPage();
+		myApplicationPage = myOrderPage.openMyApplicationPage();
+		myProductReviewPage = myApplicationPage.openMyProductReviewPage();
+
+	}
+
+	@Test
+	public void TC_10_Footer_Navigation() {
+		aboutUsPage =	myProductReviewPage.getFooterContainerPage(driver).openAboutUsPage();
+		searchTermPage = aboutUsPage.openSearchTermPage();
+		myAccountPage = searchTermPage.openMyAccountPage();
+		aboutUsPage = myAccountPage.openAboutUsPage();
+		
 	}
 
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
-	}
-
-	private int randomNumber() {
-		Random rand = new Random();
-		return rand.nextInt(999999);
 	}
 
 }

@@ -8,21 +8,21 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
+import commons.PageGeneratorManager;
 import pageObjects.user.AccountInfoPageObject;
-import pageObjects.user.HomePageObject;
-import pageObjects.user.LoginPageObject;
+import pageObjects.user.UserHomePageObject;
+import pageObjects.user.UserLoginPageObject;
 import pageObjects.user.MyDashboardPageObject;
-import pageObjects.user.PageGeneratorManager;
 import pageObjects.user.RegisterPageObject;
 
 public class Level_06_Page_Generator_PIII extends BaseTest {
 	WebDriver driver;
 
-	HomePageObject homePage;
-	LoginPageObject loginPage;
+	UserLoginPageObject loginPage;
 	MyDashboardPageObject myDashboardPage;
 	RegisterPageObject registerPage;
 	AccountInfoPageObject accountInfoPage;
+	UserHomePageObject userHomePage;
 
 	String firstName, middleName, lastName, email, password, fullName, newPassword;
 
@@ -31,7 +31,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 	public void beforeClass(String browserName) {	
 		driver = getBrowserDriver(browserName);
 		
-		homePage = PageGeneratorManager.getHomePage(driver);
+		userHomePage = PageGeneratorManager.getUserHomePage(driver);
 
 		lastName = "Lai";
 		firstName = "Test";
@@ -45,7 +45,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 
 	@Test
 	public void TC_01_Login_With_Empty_Email_And_Password() {
-		loginPage =	homePage.openLoginPage();
+		loginPage =	userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("");
 		loginPage.inputToPasswordTextbox("");
@@ -57,7 +57,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 
 	@Test
 	public void TC_02_Login_With_Invalid_Email() {
-		loginPage = homePage.openLoginPage();
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("123@456.789");
 		loginPage.inputToPasswordTextbox("123456");
@@ -70,7 +70,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 
 	@Test
 	public void TC_03_Login_With_Incorrect_Email() {
-		loginPage = homePage.openLoginPage();
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + getRandomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123456");
@@ -82,7 +82,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 
 	@Test(description = "Password less than 6 characters")
 	public void TC_04_Login_With_Invalid_Password() {
-		loginPage = homePage.openLoginPage();
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + getRandomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox("123");
@@ -95,7 +95,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 
 	@Test
 	public void TC_05_Login_With_Incorrect_Password() {
-		loginPage = homePage.openLoginPage();
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox("auto_test" + getRandomNumber() + "@live.com");
 		loginPage.inputToPasswordTextbox(String.valueOf(getRandomNumber()));
@@ -106,7 +106,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 
 	@Test
 	public void TC_06_CreateAnAccount() {
-		loginPage = homePage.openLoginPage();
+		loginPage = userHomePage.openLoginPage();
 		
 		registerPage = loginPage.clickToCreateAnAccountButton();
 
@@ -122,14 +122,13 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 		Assert.assertTrue(myDashboardPage
 				.isRegisterAccountSuccessfullyMessageDisplayed("Thank you for registering with Main Website Store."));
 
-		myDashboardPage.clickToAccountInHeaderButton();
-		homePage = myDashboardPage.clickToLogoutButton();
+		userHomePage = myDashboardPage.clickToLogoutLinkWithUser(driver);
 
 	}
 
 	@Test
 	public void TC_07_LoginWithValidEmailAndPassword() {
-		loginPage = homePage.openLoginPage();
+		loginPage = userHomePage.openLoginPage();
 
 		loginPage.inputToEmailAddressTextbox(email);
 		loginPage.inputToPasswordTextbox(password);
@@ -143,7 +142,7 @@ public class Level_06_Page_Generator_PIII extends BaseTest {
 	
 	@Test
 	public void TC_08_UpdateAccountInfo() {
-		accountInfoPage = myDashboardPage.openAccountInfoPage(driver);
+		accountInfoPage = myDashboardPage.openAccountInfoPage();
 		
 		accountInfoPage.inputToFirstNameTextbox("Test");
 		accountInfoPage.inputToLastNameTextbox("Automation");

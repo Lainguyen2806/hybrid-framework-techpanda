@@ -1,4 +1,4 @@
-package pageUIs;
+package pageUIs.user;
 
 public class AccountInfoPageUI {
 	public static final String UPDATE_FIRST_NAME_TEXTBOX = "//input[@id='firstname']";

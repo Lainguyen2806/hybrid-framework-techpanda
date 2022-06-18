@@ -2,13 +2,15 @@ package pageObjects.user;
 
 import org.openqa.selenium.WebDriver;
 
-import commons.BasePage;
-import pageUIs.MyDashboardPageUI;
+import commons.PageGeneratorManager;
+import pageObjects.navigation.SideBarMyAccountPageObject;
+import pageUIs.user.MyDashboardPageUI;
 
-public class MyDashboardPageObject extends BasePage {
+public class MyDashboardPageObject extends SideBarMyAccountPageObject {
 	WebDriver driver;
 
 	public MyDashboardPageObject(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 	}
 
@@ -16,18 +18,6 @@ public class MyDashboardPageObject extends BasePage {
 		waitForElementVisible(driver, MyDashboardPageUI.REGISTER_ACCOUNT_SUCCESSFULLY_MESSAGE);
 		String actualregisterSuccessfullyMessage = getElementText(driver, MyDashboardPageUI.REGISTER_ACCOUNT_SUCCESSFULLY_MESSAGE);
 		return actualregisterSuccessfullyMessage.contains(registerSuccessfullyMessage);
-		
-	}
-
-	public void clickToAccountInHeaderButton() {
-		waitForElementClickable(driver, MyDashboardPageUI.HEADER_ACCOUNT_BUTTON);
-		clickToElement(driver, MyDashboardPageUI.HEADER_ACCOUNT_BUTTON);
-	}
-
-	public HomePageObject clickToLogoutButton() {
-		waitForElementClickable(driver, MyDashboardPageUI.LOGOUT_BUTTON);
-		clickToElement(driver, MyDashboardPageUI.LOGOUT_BUTTON);
-		return PageGeneratorManager.getHomePage(driver);
 		
 	}
 

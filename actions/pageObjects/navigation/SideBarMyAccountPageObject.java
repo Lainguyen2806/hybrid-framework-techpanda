@@ -43,6 +43,10 @@ public class SideBarMyAccountPageObject  extends BasePage {
 		return PageGeneratorManager.getMyApplicationPage(driver);
 	
 	}
-
+	
+	public void openSideBarLinkByPageName(String pageName) {
+		waitForElementClickable(driver, SideBarMyAccountPageUI.DYNAMIC_SIDE_BAR_LINK, pageName);
+		clickToElement(driver, SideBarMyAccountPageUI.DYNAMIC_SIDE_BAR_LINK, pageName);
+	}
 	
 }

@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite parallel="false" name="Tech Panda">
-	<parameter name="userURL" value="http://live.techpanda.org/index.php/" />
-	<parameter name="adminURL" value="http://live.techpanda.org/index.php/backendlogin" />
 
-	<test name="Run on CHROME browser">
-		<parameter name="browser" value="chrome" />
-		<classes>
-			<class name="com.techpanda.account.Level_09_Switch_Role" />
-		</classes>
-	</test>
+<!-- 	<test name="Run on CHROME browser"> -->
+<!-- 		<parameter name="browser" value="chrome" /> -->
+<!-- 		<classes> -->
+<!-- 			<class name="com.techpanda.account.Level_10_Dynamic_Locator" /> -->
+<!-- 		</classes> -->
+<!-- 	</test> -->
 
 <!-- 	<test name="Run on FIREFOX browser"> -->
 <!-- 		<parameter name="browser" value="firefox" /> -->
 <!-- 		<classes> -->
-<!-- 			<class name="com.techpanda.account.Level_04_Multiple_Browsers" /> -->
+<!-- 			<class name="com.techpanda.account.Level_08_Page_Navigation" /> -->
 <!-- 		</classes> -->
 <!-- 	</test> -->
 
 
-<!-- 	<test name="Run on EDGE browser"> -->
-<!-- 		<parameter name="browser" value="edge" /> -->
-<!-- 		<classes> -->
-<!-- 			<class name="com.techpanda.account.Level_04_Multiple_Browsers" /> -->
-<!-- 		</classes> -->
-<!-- 	</test> -->
+	<test name="Run on EDGE browser">
+		<parameter name="browser" value="edge" />
+		<classes>
+			<class name="com.techpanda.account.Level_10_Dynamic_Locator" />
+		</classes>
+	</test>
 
 <!-- 	<test name="Run on SAFARI browser"> -->
 <!-- 		<parameter name="browser" value="safari" /> -->

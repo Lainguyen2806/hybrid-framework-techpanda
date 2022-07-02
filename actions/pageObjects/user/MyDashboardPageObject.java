@@ -2,7 +2,6 @@ package pageObjects.user;
 
 import org.openqa.selenium.WebDriver;
 
-import commons.PageGeneratorManager;
 import pageObjects.navigation.SideBarMyAccountPageObject;
 import pageUIs.user.MyDashboardPageUI;
 

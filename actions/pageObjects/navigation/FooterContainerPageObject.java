@@ -8,6 +8,7 @@ import pageObjects.user.AboutUsPageObject;
 import pageObjects.user.MyAccountPageObject;
 import pageObjects.user.SearchTermPageObject;
 import pageUIs.navigation.FooterContainerPageUI;
+import pageUIs.navigation.SideBarMyAccountPageUI;
 
 public class FooterContainerPageObject extends BasePage {
 	WebDriver driver;
@@ -35,6 +36,11 @@ public class FooterContainerPageObject extends BasePage {
 		clickToElement(driver, FooterContainerPageUI.MY_ACCOUNT_LINK);
 		return PageGeneratorManager.getMyAccountPage(driver);
 		
+	}
+	
+	public void openFooterLinkByPageName(String pageName) {
+		waitForElementClickable(driver, FooterContainerPageUI.DYNAMIC_FOOTER_LINK, pageName);
+		clickToElement(driver, FooterContainerPageUI.DYNAMIC_FOOTER_LINK, pageName);
 	}
 
 }
